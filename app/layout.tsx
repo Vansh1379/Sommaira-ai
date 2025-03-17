@@ -24,9 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fontSans.variable} font-sans antialiased`}>
+        <div>
+
         <Header />
-        <main>{children}</main>
+        <main className="flex-1 ">{children}</main>
         <Footer /> 
+        </div>
       </body>
     </html>
   );
