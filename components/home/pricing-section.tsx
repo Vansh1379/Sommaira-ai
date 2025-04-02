@@ -1,4 +1,14 @@
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+
+type PriceType = {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  items: string[];
+  paymentLink: string;
+};
 
 const plans = [
   {
@@ -28,23 +38,38 @@ const plans = [
   },
 ];
 
-const PricingCard = ({ name, price, description, items, id, paymentLink }) => {
+const PricingCard = ({
+  name,
+  price,
+  description,
+  items,
+  id,
+  paymentLink,
+}: PriceType) => {
   return (
     <div className="relative w-full max-w-lg">
-      <div>
-        <p>{name}</p>
-        <p>{description}</p>
-      </div>
-      <div>
-        <p>${price}</p>
-      </div>
-      <div>
-        {items.map((item, idx) => (
-          <li key={idx}>{item}</li>
-        ))}
-      </div>
-      <div>
-        <Link href={paymentLink}>Buy Now</Link>
+      <div
+        className={cn(
+          "relative flex flex-col h-full gap-4 lg:gap-8 z-10 p-8 rounded-2xl border-[1px] border-gray-500/20"
+        )}
+      >
+        <div className="flex justify-between items-center gap-4">
+          <div>
+            <p className="text-lg lg:text-xl font-bold  capitalize">{name}</p>
+            <p className="text-base mt-2  ">{description}</p>
+          </div>
+        </div>
+        <div>
+          <p>${price}</p>
+        </div>
+        <div>
+          {items.map((item, idx) => (
+            <li key={idx}>{item}</li>
+          ))}
+        </div>
+        <div>
+          <Link href={paymentLink}>Buy Now</Link>
+        </div>
       </div>
     </div>
   );
