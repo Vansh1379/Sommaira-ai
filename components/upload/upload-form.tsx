@@ -22,7 +22,12 @@ export default function UploadForm() {
     console.log("submit");
     const formData = new FormData(e.currentTarget);
     const file = formData.get("file") as File;
-    const result = schema.safeParse(file);
+    const validatedFeilds = schema.safeParse({ file });
+    if (!validatedFeilds.success) {
+      console.log(
+        validatedFeilds.error.flatten().fieldErrors.file?.[0] ?? "Invalid File"
+      );
+    }
   };
   return (
     <div className="flex flex-col gap-8 w-full max-w-2xl mx-auto">
